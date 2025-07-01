@@ -1,151 +1,129 @@
-/* Estilos Gerais do Body e Container Principal */
+/* Estilos Gerais do Body e Fontes */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
-    background-color: #f4f4f4;
+    background-color: #f0f2f5; /* Fundo suave */
     color: #333;
-    display: flex; /* Para centralizar o carrossel na página */
-    justify-content: center; /* Centraliza horizontalmente */
-    align-items: center; /* Centraliza verticalmente */
-    min-height: 100vh; /* Garante que o body ocupe a altura total da viewport */
-    overflow: hidden; /* Evita barras de rolagem indesejadas do carrossel */
+    line-height: 1.6;
 }
 
-/* Container Principal do Carrossel */
-.carousel-container {
-    position: relative;
-    width: 90%; /* Ajuste a largura conforme necessário */
-    max-width: 800px; /* Largura máxima para o carrossel */
-    overflow: hidden; /* Esconde slides fora da vista */
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-}
-
-/* Trilha dos Slides */
-.carousel-track {
-    display: flex;
-    transition: transform 0.5s ease-in-out; /* Suaviza a transição dos slides */
-}
-
-/* Slides Individuais */
-.carousel-slide {
-    min-width: 100%; /* Cada slide ocupa 100% da largura do track visível */
-    box-sizing: border-box;
-    position: relative;
-    display: flex; /* Para centralizar o conteúdo do slide */
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0; /* Impede que os slides encolham */
-    padding: 20px; /* Preenchimento interno do slide */
-}
-
-.carousel-slide img {
-    width: 100%;
-    max-height: 400px; /* Altura máxima da imagem */
-    object-fit: contain; /* Garante que a imagem se ajuste sem cortar ou distorcer */
-    border-radius: 5px;
-    display: none; /* Imagem escondida por padrão, mostrada via JS após carregamento */
-}
-
-/* Texto do Slide */
-.slide-text {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    right: 20px;
-    background-color: rgba(0, 0, 0, 0.6);
+/* Cabeçalho */
+header {
+    background-color: #007bff; /* Cor principal da barra do cabeçalho */
     color: white;
-    padding: 10px 15px;
-    border-radius: 5px;
-    font-size: 1.2em;
+    padding: 20px 0;
     text-align: center;
-    opacity: 1;
-    transition: opacity 0.3s ease-in-out;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Esconder texto em telas muito pequenas, se necessário */
-@media (max-width: 500px) {
-    .slide-text {
-        font-size: 1em;
-        padding: 8px 10px;
-    }
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+    font-weight: 700;
 }
 
-/* Botões de Navegação (Anterior/Próximo) */
-.carousel-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
+/* Contêiner Principal da Prévia de Notícias */
+.news-preview-container {
+    display: grid;
+    /* Ajusta automaticamente o número de colunas, com largura mínima de 280px */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px; /* Espaçamento entre os cards */
+    max-width: 1200px; /* Largura máxima do contêiner */
+    margin: 40px auto; /* Centraliza o contêiner e adiciona margem superior/inferior */
+    padding: 0 20px; /* Preenchimento nas laterais para telas menores */
+}
+
+/* Card de Notícia Individual (Link completo) */
+.news-card {
+    background-color: #fff;
+    border-radius: 12px; /* Bordas arredondadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    overflow: hidden; /* Garante que a imagem e conteúdo fiquem dentro das bordas arredondadas */
+    text-decoration: none; /* Remove sublinhado do link */
+    color: inherit; /* Herda a cor do texto do body */
+    display: flex;
+    flex-direction: column; /* Conteúdo em coluna: imagem, depois texto */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.news-card:hover {
+    transform: translateY(-8px); /* Levanta o card no hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra mais intensa no hover */
+}
+
+.news-card img {
+    width: 100%;
+    height: 180px; /* Altura fixa para as imagens */
+    object-fit: cover; /* Recorta a imagem para preencher o espaço */
+    display: block;
+    border-top-left-radius: 12px; /* Arredonda só as bordas de cima */
+    border-top-right-radius: 12px;
+}
+
+/* Conteúdo de Texto dentro do Card */
+.news-content {
+    padding: 20px;
+    flex-grow: 1; /* Permite que o conteúdo ocupe o espaço restante */
+    display: flex;
+    flex-direction: column;
+}
+
+.news-content h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-size: 1.3em;
+    line-height: 1.3;
+    color: #2c3e50; /* Cor escura para o título */
+    font-weight: 600;
+}
+
+.news-content p {
+    font-size: 0.95em;
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    flex-grow: 1; /* Garante que o parágrafo use todo o espaço disponível */
+}
+
+/* Botão/Link "Leia Mais" */
+.read-more {
+    display: inline-block;
+    background-color: #007bff; /* Cor principal */
     color: white;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    font-size: 1.8em;
-    border-radius: 50%; /* Botões redondos */
-    z-index: 10;
-    transition: background-color 0.3s ease;
-    width: 50px; /* Largura e altura para fazer um círculo */
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    padding: 10px 18px;
+    border-radius: 25px; /* Formato de pílula */
+    text-decoration: none;
+    font-size: 0.9em;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    align-self: flex-start; /* Alinha o botão à esquerda do card */
+    margin-top: auto; /* Empurra o botão para a parte inferior do card */
+    transition: background-color 0.3s ease-in-out;
 }
 
-.carousel-button:hover {
-    background-color: rgba(0, 0, 0, 0.7);
+.read-more:hover {
+    background-color: #0056b3; /* Cor mais escura no hover */
 }
 
-.carousel-button.prev {
-    left: 10px;
+/* Rodapé */
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    background-color: #333;
+    color: white;
+    font-size: 0.9em;
 }
 
-.carousel-button.next {
-    right: 10px;
-}
+/* Responsividade (para telas menores) */
+@media (max-width: 768px) {
+    .news-preview-container {
+        grid-template-columns: 1fr; /* Uma coluna em telas menores */
+        padding: 0 15px; /* Mais preenchimento nas laterais */
+    }
 
-/* Pontos de Navegação */
-.carousel-dots {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 8px; /* Espaçamento entre os pontos */
-    z-index: 10;
-}
-
-.dot {
-    width: 12px;
-    height: 12px;
-    background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 50%;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.dot.active {
-    background-color: white;
-    transform: scale(1.2); /* Ponto ativo um pouco maior */
-}
-
-/* Spinner de Carregamento */
-.spinner {
-    border: 4px solid rgba(0, 0, 0, 0.1);
-    border-top: 4px solid #3498db; /* Cor do spinner */
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    animation: spin 1s linear infinite; /* Animação de rotação */
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: none; /* Escondido por padrão, mostrado por JS */
-}
-
-@keyframes spin {
-    0% { transform: translate(-50%, -50%) rotate(0deg); }
-    100% { transform: translate(-50%, -50%) rotate(360deg); }
+    header h1 {
+        font-size: 2em;
+    }
 }
